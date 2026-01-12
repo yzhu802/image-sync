@@ -8,7 +8,7 @@ on:
         required: true
         default: 'vllm/vllm-omni:v0.12.0rc1' 
       target_tag:
-        description: 'target Tag (GHCR)'
+        description: 'target Tag (aliyun)'
         required: true
         default: 'v0.12.0rc1'
 
