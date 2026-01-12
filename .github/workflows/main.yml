@@ -13,55 +13,33 @@ on:
         default: 'v0.12.0rc1'
 
 env:
-  REGISTRY: ghcr.io
-  IMAGE_NAME: yzhu802/vllm-omni-sync
+  # REGISTRY: ghcr.io
+  # IMAGE_NAME: yzhu802/vllm-omni-sync
+  REGISTRY: crpi-sd1f4vtsmcd6kney.cn-qingdao.personal.cr.aliyuncs.com
+  IMAGE_NAME: yzhu802/vllm-omni
 
 jobs:
   sync-image:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
-
     steps:
-      # === 新增步骤：给 Runner 瘦身（释放约 20GB+ 空间）===
-      - name: Free up disk space
-        run: |
-          echo "清理前可用空间："
-          df -h | grep '/$'
-          
-          echo "正在删除无用软件..."
-          sudo rm -rf /usr/share/dotnet
-          sudo rm -rf /usr/local/lib/android
-          sudo rm -rf /opt/ghc
-          sudo rm -rf /opt/hostedtoolcache/CodeQL
-          sudo docker image prune --all --force
-          
-          echo "清理后可用空间："
-          df -h | grep '/$'
-      # =================================================
-
-      - name: Log in to the Container registry
+      - name: Log in to Aliyun Registry
         uses: docker/login-action@v2
         with:
           registry: ${{ env.REGISTRY }}
-          username: ${{ github.actor }}
-          password: ${{ secrets.GHCR_TOKEN }}
+          username: ${{ secrets.ALIYUN_USERNAME }}
+          password: ${{ secrets.ALIYUN_PASSWORD }}
 
       - name: Pull & Tag & Push
         run: |
-          # 1. 从 Docker Hub 拉取
+          # 1. 拉取源镜像
           docker pull ${{ inputs.source_image }}
           
-          # 2. 重新打标签为 GHCR 格式
+          # 2. 打标为阿里云格式
           TARGET_IMAGE="${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ inputs.target_tag }}"
-          TARGET_IMAGE=$(echo "$TARGET_IMAGE" | tr '[:upper:]' '[:lower:]')
-          
           docker tag ${{ inputs.source_image }} $TARGET_IMAGE
           
-          # 3. 推送到 GHCR
+          # 3. 推送
           docker push $TARGET_IMAGE
           
           echo "✅ 同步完成！"
-          echo "国内加速地址是 (以华北1为例):"
-          echo "registry-cn-huabei1-internal.ebcloud.com/$TARGET_IMAGE"
+          echo "你的镜像地址是: $TARGET_IMAGE"
