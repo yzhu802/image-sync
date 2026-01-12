@@ -22,6 +22,18 @@ jobs:
   sync-image:
     runs-on: ubuntu-latest
     steps:
+      # 清理磁盘空间，腾出约 30GB 空间
+      - name: Free Disk Space (Ubuntu)
+        uses: jlumbroso/free-disk-space@main
+        with:
+          tool-cache: true
+          android: true
+          dotnet: true
+          haskell: true
+          large-packages: true
+          docker-images: false # 不要删 docker 基础环境
+          swap-storage: true
+
       - name: Log in to Aliyun Registry
         uses: docker/login-action@v2
         with:
@@ -32,6 +44,7 @@ jobs:
       - name: Pull & Tag & Push
         run: |
           # 1. 拉取源镜像
+          echo "正在拉取镜像，文件较大请耐心等待..."
           docker pull ${{ inputs.source_image }}
           
           # 2. 打标为阿里云格式
@@ -39,6 +52,7 @@ jobs:
           docker tag ${{ inputs.source_image }} $TARGET_IMAGE
           
           # 3. 推送
+          echo "正在推送镜像到阿里云..."
           docker push $TARGET_IMAGE
           
           echo "✅ 同步完成！"
