@@ -6,17 +6,19 @@ on:
       source_image:
         description: 'source image (Docker Hub)'
         required: true
-        default: 'vllm/vllm-omni:v0.12.0rc1' 
+        default: 'vllm/vllm-openai:v0.14.0' 
       target_tag:
-        description: 'target Tag (aliyun)'
+        description: 'target Tag (ebcloud)'
         required: true
-        default: 'v0.12.0rc1'
+        default: 'v0.14.0'
 
 env:
   # REGISTRY: ghcr.io
   # IMAGE_NAME: yzhu802/vllm-omni-sync
-  REGISTRY: crpi-sd1f4vtsmcd6kney.cn-qingdao.personal.cr.aliyuncs.com
-  IMAGE_NAME: yzhu802/vllm-omni
+  # REGISTRY: crpi-sd1f4vtsmcd6kney.cn-qingdao.personal.cr.aliyuncs.com
+  # IMAGE_NAME: yzhu802/vllm-omni
+  REGISTRY: registry-cn-huabei1.ebcloud.com/tenant-37383037
+  IMAGE_NAME: yzhu802/vllm
 
 jobs:
   sync-image:
