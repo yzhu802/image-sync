@@ -8,16 +8,14 @@ on:
         required: true
         default: 'vllm/vllm-openai:v0.14.0' 
       target_tag:
-        description: 'target Tag (ebcloud)'
+        description: 'target Tag (aliyun)'
         required: true
         default: 'v0.14.0'
 
 env:
   # REGISTRY: ghcr.io
   # IMAGE_NAME: yzhu802/vllm-omni-sync
-  # REGISTRY: crpi-sd1f4vtsmcd6kney.cn-qingdao.personal.cr.aliyuncs.com
-  # IMAGE_NAME: yzhu802/vllm-omni
-  REGISTRY: registry-cn-huabei1.ebcloud.com/tenant-37383037
+  REGISTRY: crpi-sd1f4vtsmcd6kney.cn-qingdao.personal.cr.aliyuncs.com
   IMAGE_NAME: yzhu802/vllm
 
 jobs:
