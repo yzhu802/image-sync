@@ -6,17 +6,17 @@ on:
       source_image:
         description: 'source image (Docker Hub)'
         required: true
-        default: 'vllm/vllm-openai:v0.16.0-cu130' 
+        default: vllm/vllm-omni:v0.16.0' 
       target_tag:
         description: 'target Tag (aliyun)'
         required: true
-        default: 'v0.16.0-cu130'
+        default: 'v0.16.0'
 
 env:
   # REGISTRY: ghcr.io
   # IMAGE_NAME: yzhu802/vllm-omni-sync
   REGISTRY: crpi-sd1f4vtsmcd6kney.cn-qingdao.personal.cr.aliyuncs.com
-  IMAGE_NAME: yzhu802/vllm
+  IMAGE_NAME: yzhu802/vllm-omni
 
 jobs:
   sync-image:
