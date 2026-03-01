@@ -6,7 +6,7 @@ on:
       source_image:
         description: 'source image (Docker Hub)'
         required: true
-        default: vllm/vllm-omni:v0.16.0' 
+        default: 'vllm/vllm-omni:v0.16.0' 
       target_tag:
         description: 'target Tag (aliyun)'
         required: true
