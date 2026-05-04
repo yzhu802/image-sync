@@ -6,7 +6,7 @@ on:
       source_image:
         description: 'source image (Docker Hub)'
         required: true
-        default: 'vllm-openai:v0.20.0-cu129' 
+        default: 'vllm/vllm-openai:v0.20.0-cu129' 
       target_tag:
         description: 'target Tag (aliyun)'
         required: true
