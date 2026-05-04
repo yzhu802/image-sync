@@ -16,7 +16,7 @@ env:
   # REGISTRY: ghcr.io
   # IMAGE_NAME: yzhu802/vllm-omni-sync
   REGISTRY: crpi-sd1f4vtsmcd6kney.cn-qingdao.personal.cr.aliyuncs.com
-  IMAGE_NAME: yzhu802/vllm-omni
+  IMAGE_NAME: yzhu802/vllm
 
 jobs:
   sync-image:
